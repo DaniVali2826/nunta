@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Daniela & Vali | 24 Octombrie 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #F8F4EC; /* Pergament luminos */
+      --cream: #EAE0D3;
+      --champagne: #D4AF37; 
+      --terracotta: #C45C24; /* Portocaliu tomnatic */
+      --copper: #9A4119;
+      --burgundy: #5C2A18; /* Roșcat-maroniu pentru titluri */
+      --olive: #736E46; 
+      --brown: #3E200F; /* Maro închis pentru text principal */
+      --gold: #C09A53; /* Auriu pentru chenare */
+      --shadow: rgba(62, 32, 15, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--ivory);
+      /* Efect de acuarelă vibrantă și textură de pergament - FIXE pe fundal */
+      background-image: 
+        url('https://www.transparenttextures.com/patterns/rice-paper.png'),
+        radial-gradient(circle at 0% 0%, rgba(196, 92, 36, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 100% 20%, rgba(192, 154, 83, 0.3) 0%, transparent 45%),
+        radial-gradient(circle at 5% 70%, rgba(92, 42, 24, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 95% 100%, rgba(196, 92, 36, 0.3) 0%, transparent 55%);
+      background-attachment: fixed;
+      color: var(--brown);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+      /* Mască luminoasă în centru, frunze vibrante pe margini */
+      background:
+        radial-gradient(circle at center, rgba(248, 244, 236, 0.90) 30%, rgba(248, 244, 236, 0.15) 100%),
+        url('https://images.unsplash.com/photo-1507339622713-334b5b29b634?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+      padding: 50px 30px;
+      /* Chenar auriu dublu inspirat din invitație */
+      border: 1px solid var(--gold);
+      border-radius: 24px;
+      background: rgba(248, 244, 236, 0.75);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 0 6px rgba(248, 244, 236, 0.5), 0 20px 50px rgba(62, 32, 15, 0.15);
+    }
+
+    .eyebrow {
+      margin: 0 0 15px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--terracotta);
+    }
+
+    h1 {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(4rem, 12vw, 8.5rem);
+      line-height: 1.1;
+      margin: 0;
+      font-weight: 400;
+      color: var(--burgundy);
+    }
+
+    .date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin: 25px 0 15px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--burgundy);
+    }
+
+    .hero-text {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--brown);
+      font-weight: 400;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--terracotta);
+      color: var(--ivory);
+      text-decoration: none;
+      border-radius: 999px;
+      margin-top: 15px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 20px rgba(196, 92, 36, 0.25);
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      background: var(--burgundy);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(92, 42, 24, 0.3);
+    }
+
+    .section {
+      max-width: 980px;
+      margin: auto;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section.alt {
+      max-width: 100%;
+      background: linear-gradient(135deg, rgba(234, 224, 211, 0.4), transparent);
+    }
+
+    .section-inner {
+      max-width: 980px;
+      margin: auto;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--burgundy);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+      color: rgba(62, 32, 15, 0.8);
+    }
+
+    .divider {
+      width: 140px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .divider::before {
+      content: "♥";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -52%);
+      background: var(--ivory);
+      padding: 0 15px;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+
+    .alt .divider::before {
+      background: #f1ebd8;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(192, 154, 83, 0.4);
+      border-radius: 20px;
+      padding: 35px 25px;
+      box-shadow: 0 10px 30px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(62, 32, 15, 0.15);
+    }
+
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--burgundy);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .card p {
+      line-height: 1.7;
+      margin: 6px 0;
+      color: var(--brown);
+    }
+
+    .time {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 6px 16px;
+      border: 1px solid var(--terracotta);
+      border-radius: 999px;
+      color: var(--terracotta);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .location-icon {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      vertical-align: middle;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 7px rgba(62, 32, 15, 0.16));
+    }
+
+    .card h3 .location-icon {
+      transform: translateY(-2px);
+    }
+
+    .story-card {
+      max-width: 760px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.9;
+    }
+
+    .contact-info {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: var(--burgundy);
+    }
+
+    .countdown {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 600;
+      color: var(--terracotta);
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(248, 244, 236, 0.85);
+      border-top: 1px solid rgba(192, 154, 83, 0.3);
+      color: var(--brown);
+    }
+
+    footer .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.2rem;
+      margin: 15px 0 0;
+      color: var(--burgundy);
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 35px 20px;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .section {
+        padding: 60px 15px;
+      }
+      .location-icon {
+        width: 62px;
+        height: 62px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Ne căsătorim</p>
+      <h1>Daniela <br><span style="font-size: 0.6em; font-family: 'Great Vibes', cursive; color: var(--terracotta);">&</span><br> Vali</h1>
+      <p class="date">· 24 ·<br><span style="font-size: 0.6em; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px;">Octombrie 2026</span></p>
+      <p class="hero-text">
+        Ne-ar bucura mult să fiți alături de noi într-o zi de toamnă pe care vrem să o ținem minte: cu emoții, oameni dragi, zâmbete și mult dans.
+      </p>
+      <a class="button" href="#rsvp">Confirmă participarea</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>It's a love story!</h2>
+    <div class="divider"></div>
+
+    <div class="card story-card">
+      <p>
+        Ziua nunții noastre nu ar fi la fel fără oamenii care ne-au fost aproape
+        și care fac parte, într-un fel sau altul, din viața noastră.
+        De aceea, ne dorim să vă avem lângă noi într-o zi plină de emoție,
+        zâmbete și bucurie.
+      </p>
+
+      <p>
+        Ne imaginăm o seară de toamnă caldă și frumoasă, cu mese pline,
+        pahare ridicate, povești, râsete și ringul de dans cât mai ocupat.
+      </p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="section-inner">
+      <h2>Unde ne vedem</h2>
+      <div class="divider"></div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>
+            <img src="biserica-sfantul-fanurie-icon.png" alt="Biserica Sfântul Fanurie" class="location-icon" />
+            Cununia religioasă
+          </h3>
+          <p>TBD</p>
+          <p>TBD</p>
+          <span class="time">TBD</span>
+        </div>
+
+        <div class="card">
+          <h3>
+            <img src="the-sunset-barn-icon.png" alt="The Sunset Barn" class="location-icon" />
+            Petrecerea
+          </h3>
+          <p>TBD</p>
+          <p>TBD</p>
+          <span class="time">TBD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Locații</h2>
+    <p class="subtitle">
+      Ca să ajungeți ușor la noi, am pus mai jos linkurile directe către Google Maps.
+    </p>
+    <div class="divider"></div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>
+          <img src="biserica-sfantul-fanurie-icon.png" alt="Biserica Sfântul Fanurie" class="location-icon" />
+          TBD
+        </h3>
+        <p>TBD</p>
+        <a
+          class="button"
+          href="https://http.cat/status/404"
+          target="_blank">
+          Deschide în Google Maps
+        </a>
+      </div>
+
+      <div class="card">
+        <h3>
+          <img src="the-sunset-barn-icon.png" alt="The Sunset Barn" class="location-icon" />
+          TBD
+        </h3>
+        <p>TBD</p>
+        <a
+          class="button"
+          href="https://http.cat/status/404"
+          target="_blank">
+          Deschide în Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="rsvp">
+    <div class="section-inner">
+      <h2>RSVP</h2>
+      <p class="subtitle">
+        Prezența voastră înseamnă enorm pentru noi.
+      </p>
+      <div class="divider"></div>
+
+      <div class="card story-card">
+        <p>
+          Vă rugăm să ne confirmați participarea până la data de<br>
+          <strong>30.09.2026</strong>
+        </p>
+
+        <a
+          class="button"
+          href="https://http.cat/status/404"
+          target="_blank">
+          Completează formularul
+        </a>
+      </div> </div>
+  </section>
+
+  <section class="section">
+    <h2>Numărătoare inversă</h2>
+    <p class="subtitle">
+      Până la ziua în care spunem „da”.
+    </p>
+    <div class="divider"></div>
+
+    <div id="countdown" class="countdown"></div>
+  </section>
+
+  <footer>
+    <p>Vă așteptăm cu drag!</p>
+  </footer>
+
+  <script>
+    const targetDate = new Date("2026-10-24T14:30:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML =
+          "Astăzi este ziua cea mare! ❤️";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML =
+        `${days} zile · ${hours} ore · ${minutes} minute · ${seconds} secunde`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
