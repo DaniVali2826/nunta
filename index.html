@@ -239,7 +239,6 @@
 
     .time {
       display: inline-block;
-      margin-top: 15px;
       padding: 6px 16px;
       border: 1px solid var(--terracotta);
       border-radius: 999px;
@@ -324,6 +323,84 @@
         font-size: 1.35rem;
       }
     }
+
+    .time-and-calendar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .calendar-container {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .calendar-btn {
+      display: inline-block;
+      padding: 8px 24px;
+      background: transparent;
+      border: 1px solid var(--terracotta);
+      border-radius: 999px;
+      color: var(--terracotta);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .calendar-btn:hover {
+      background: var(--terracotta);
+      color: var(--ivory);
+    }
+
+    .calendar-dropdown {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 10px;
+      background: rgba(248, 244, 236, 0.98);
+      border: 1px solid var(--gold);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(62, 32, 15, 0.18);
+      z-index: 100;
+      min-width: 220px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+
+    .calendar-dropdown.show {
+      display: block;
+    }
+
+    .calendar-dropdown a {
+      display: block;
+      padding: 12px 18px;
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-align: left;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+      border-bottom: 1px solid rgba(192, 154, 83, 0.15);
+    }
+
+    .calendar-dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    .calendar-dropdown a:hover {
+      background: var(--cream);
+      color: var(--burgundy);
+    }
   </style>
 </head>
 
@@ -379,7 +456,18 @@
           <h3>Petrecerea</h3>
           <p>Hotel Panorama</p>
           <p>Calea Vâlcele, nr. 9, Sfântu Gheorghe</p>
-          <span class="time">18:00</span>
+          <div class="time-and-calendar">
+            <span class="time">18:00</span>
+            <div class="calendar-container">
+              <button class="calendar-btn" onclick="toggleCalendarDropdown(event)">
+                Adaugă în Calendar
+              </button>
+              <div class="calendar-dropdown" id="calendarDropdown">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Daniela+%26+Vali+-+Nunt%C4%83&dates=20261024T180000/20261025T050000&ctz=Europe/Bucharest&details=V%C4%83+a%C8%99tept%C4%83m+cu+drag+la+nunta+noastr%C4%83%21&location=Hotel+Panorama%2C+Calea+V%C3%A2lcele%2C+nr.+9%2C+Sf%C3%A2ntu+Gheorghe" target="_blank">Google Calendar</a>
+                <a href="javascript:void(0)" onclick="downloadICS()">Apple Calendar / iCal</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -480,6 +568,49 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    function toggleCalendarDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById("calendarDropdown");
+      dropdown.classList.toggle("show");
+    }
+
+    window.addEventListener("click", function() {
+      const dropdown = document.getElementById("calendarDropdown");
+      if (dropdown && dropdown.classList.contains("show")) {
+        dropdown.classList.remove("show");
+      }
+    });
+
+    function downloadICS() {
+      const title = "Daniela & Vali - Nunta";
+      const description = "Va asteptam cu drag la nunta noastra!";
+      const location = "Hotel Panorama, Calea Valcele, nr. 9, Sfantu Gheorghe";
+      // UTC time for Oct 24, 2026 18:00 (EEST is UTC+3, so 15:00 UTC)
+      const start = "20261024T150000Z";
+      // UTC time for Oct 25, 2026 05:00 (EEST is UTC+3, so 02:00 UTC)
+      const end = "20261025T020000Z";
+
+      const icsContent = "BEGIN:VCALENDAR\n" +
+                         "VERSION:2.0\n" +
+                         "PRODID:-//Daniela Vali Wedding//NONSGML v1.0//EN\n" +
+                         "BEGIN:VEVENT\n" +
+                         "SUMMARY:" + title + "\n" +
+                         "DESCRIPTION:" + description + "\n" +
+                         "LOCATION:" + location + "\n" +
+                         "DTSTART:" + start + "\n" +
+                         "DTEND:" + end + "\n" +
+                         "END:VEVENT\n" +
+                         "END:VCALENDAR";
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", "Daniela_Vali_Nunta.ics");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   </script>
 
 </body>
