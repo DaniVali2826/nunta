@@ -6,9 +6,13 @@
 
   <title>Daniela & Vali | 24 Octombrie 2026</title>
 
+  <!-- Preconnect și Preload resurse critice pentru performanță (previne flicker-ul la încărcare) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="preload" href="Munte_processed.png?v=2" as="image" />
+  <link rel="preload" href="restaurant.png?v=2" as="image" />
 
   <style>
     :root {
@@ -45,6 +49,71 @@
         radial-gradient(circle at 95% 100%, rgba(196, 92, 36, 0.3) 0%, transparent 55%);
       background-attachment: fixed;
       color: var(--brown);
+    }
+
+    body.loading {
+      overflow: hidden;
+    }
+
+    .loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ivory);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                  transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                  visibility 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .loader-wrapper.fade-out {
+      opacity: 0;
+      transform: scale(1.03);
+      visibility: hidden;
+    }
+
+    .spinner {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner-outer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(192, 154, 83, 0.15);
+      border-top: 1.5px solid var(--terracotta);
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    .spinner-inner {
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      border: 1px solid rgba(192, 154, 83, 0.1);
+      border-bottom: 1.5px solid var(--gold);
+      border-radius: 50%;
+      animation: spin-reverse 2s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spin-reverse {
+      to { transform: rotate(-360deg); }
     }
 
     .hero {
@@ -404,7 +473,15 @@
   </style>
 </head>
 
-<body>
+<body class="loading">
+
+  <!-- Loader overlay -->
+  <div id="loader" class="loader-wrapper">
+    <div class="spinner">
+      <div class="spinner-outer"></div>
+      <div class="spinner-inner"></div>
+    </div>
+  </div>
 
   <section class="hero">
     <div class="hero-content">
@@ -611,6 +688,16 @@
       link.click();
       document.body.removeChild(link);
     }
+
+    // Hide loader wrapper after everything (fonts, background image, DOM) is fully loaded
+    window.addEventListener("load", function() {
+      const loader = document.getElementById("loader");
+      if (loader) {
+        loader.style.opacity = "0";
+        loader.style.visibility = "hidden";
+        document.body.classList.remove("loading");
+      }
+    });
   </script>
 
 </body>
